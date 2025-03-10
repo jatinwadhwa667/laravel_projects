@@ -1,0 +1,90 @@
+@extends('layout.app')
+
+@section('Content')
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <h3>Customers</h3>
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <a href="{{ route('customer.index') }}" class="btn"
+                                style="background-color: #4643d3; color: white;"><i class="fas fa-chevron-left"></i> Back</a>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="card-body">
+                    <form action="{{ route('customer.update' , $customerdata->id) }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <img src="{{ asset($customerdata->image) }}" alt="avator" style="width:100px">
+                                    <label for="">Image</label>
+                                    <input type="file" class="form-control" name="image">
+                                </div>
+                                @error('image')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">First Name</label>
+                                    <input type="text" class="form-control" name="first_name" value = "{{ $customerdata->first_name }}">
+                                </div>
+                                @error('first_name')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Last Name</label>
+                                    <input type="text" class="form-control" name="last_name"  value = "{{ $customerdata->last_name }}">
+                                </div>
+                                @error('last_name')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" name="email"  value = "{{$customerdata->email }}">
+                                </div>
+                                @error('email')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="form-group">
+                                    <label for="">Phone</label>
+                                    <input type="text" class="form-control" name="phone"  value = "{{$customerdata->phone_number }}">
+                                </div>
+                                @error('phone')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <div class="form-group">
+                                    <label for="">Bank Account Number</label>
+                                    <input type="text" class="form-control" name="account_number"  value = "{{ $customerdata->account_number }}">
+                                </div>
+                                @error('account_number')
+                                    <small style="color:red">{{ $message }}</small>
+                                @enderror
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <button type="submit" class="btn btn-dark"><i class="fas fa-save"></i>Update</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
